@@ -1,0 +1,24 @@
+name: edrixs_tutorial
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.11
+  - jupyterlab=4.*
+  - jupytext<2
+  - jupyterlab-mathjax3>=4.3
+  - jupyterlab-myst>=2.4
+  - edrixs>=0.0.8
+  - ipympl=0.9.*
+  - ipywidgets=8.*
+  - nodejs
+  - openmpi
+  - unzip
+  - bokeh=3.0.*
+  - h5py
+  - hdf5
+  - seaborn
+  - sphinx-gallery
+  - myst-nb
+  - sphinx-book-theme
+  - sphinx-design
+  - sphinx-copybutton

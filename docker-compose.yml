@@ -1,0 +1,12 @@
+services:
+  pixi-jlab:
+    build:
+      context: .
+    image: edrixs_tutorial_image
+    platform: linux/amd64   # ensures amd64 for both build & run (requires BuildKit)
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+
+
