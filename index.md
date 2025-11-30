@@ -53,7 +53,9 @@ glob:
 ---
 tutorials/intro/intro.md
 tutorials/atomic/atomic_model.md
+tutorials/current_status/current_status.md
 tutorials/AIM/AIM.md
+tutorials/algorithms/algorithms.md
 ```
 [Open on Binder]: https://mybinder.org/v2/gh/EDRIXS/MAIQMag_workshop/HEAD?urlpath=lab/tree/tutorials/
 [docker]: https://www.docker.com/products/docker-desktop/

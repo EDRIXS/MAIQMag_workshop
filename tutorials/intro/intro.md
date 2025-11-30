@@ -1,6 +1,7 @@
 # Introductory material
 
-[EDRIXS](https://edrixs.github.io/edrixs/) is an open-source toolkit for performing exact diagonalization RIXS calculations. See Ref. [^1] for the original paper, Ref. [^2] for the docs, and Ref. [^3] for the source code.  
+[EDRIXS](https://edrixs.github.io/edrixs/) is an open-source toolkit for performing exact diagonalization RIXS calculations. See Ref. [^1] for the original paper, Ref. [^2] for the docs, and Ref. [^3] for the source code. The [Pedagogical examples
+](https://edrixs.github.io/edrixs/auto_examples/index.html) should also be informative.
 
 
 ## Geometry and notation
@@ -33,8 +34,9 @@ A two fermion term that accounts for:
 
 * Crystal field. For example $10 D_q$, which is the splitting between the $e_g$ and $t_{2g}$ orbitals in octahedral symmetry. 
 * Spin orbit coupling, $\lambda_i$, $\lambda_n$, $\lambda_c$
-* Hopping (in cases where this is part of the model) $V_{eg}$, $V_{t2g}$
+* Hopping (in cases where this is part of the model). e.g. $V_{eg}$, $V_{t2g}$
 * Charge-transfer energy $\Delta$
+* Core hole potential  
 
 The four fermion term that accounts for:
 
