@@ -2,7 +2,7 @@
 
 Our recent [paper](https://markdean.info/assets/pdf/lajer2025hamiltonian.pdf) is useful for understanding where we are. See Ref. [^1] for the original paper and Ref. [^2] for the source code.  
 
-## Basics of tooling
+## Summary of what we implemented
 
 * Atomic model for RIXS (similar to that shown previously).
 
@@ -14,6 +14,10 @@ Our recent [paper](https://markdean.info/assets/pdf/lajer2025hamiltonian.pdf) is
 
 ## Performance 
 
+* We did 60 runs of 1000 iterations corresponding to running overnight on a modest computer.
+* Obtained solutions similar to a human.
+* Super-human error analysis.
+ 
 [^1]: Hamiltonian parameter inference from resonant inelastic x-ray scattering with active learning, Marton K. Lajer, Xin Dai, Kipton Barros, Matthew R. Carbone, S. Johnston, and M. P. M. Dean
 [Phys. Rev. B 112, 155167 (2025)](https://doi.org/10.1103/tnqm-ttj3)
 
