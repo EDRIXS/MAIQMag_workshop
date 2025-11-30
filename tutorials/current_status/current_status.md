@@ -2,9 +2,9 @@
 
 Our recent [paper](https://markdean.info/assets/pdf/lajer2025hamiltonian.pdf) is useful for understanding where we are. See Ref. [^1] for the original paper and Ref. [^2] for the source code.  
 
-## Geometry and notation
+## Basics of tooling
 
-* Atomic model for RIXS.
+* Atomic model for RIXS (similar to that shown previously).
 
 * Incident-energy vs. energy-loss planes for specific geometry and incident x-ray polarization. This is the data for Fe<sub>2</sub>O<sub>3</sub>:[^3]
 

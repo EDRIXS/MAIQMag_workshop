@@ -113,6 +113,7 @@ $$
 The general process is:
 
 * Fock basis is generated in integer representation
+
 ```{code-cell} ipython3
 for binary_string in ["011", "101", "110"]:
     print(f"{binary_string} is {int(binary_string, 2)}")
@@ -129,7 +130,7 @@ $$
 \end{bmatrix}
 $$
 
-is encoded as 
+is encoded as
 
 ```{code-cell} ipython3
 V         = [10, 20, 30, 40, 50, 60, 70, 80]
@@ -178,8 +179,8 @@ We are still finalizing the planned approach.
 
 
 ### Infrastructure changes
-The current plan is to call into more modern platform agnostic CPU/GPU pacakges 
-[PETSc](https://petsc.org/release/)+[SLEPc](https://slepc.upv.es/) packages. These packages, which are primairly written in C, have python interfaces.
+The current plan is to call into more modern platform-agnostic CPU/GPU packages 
+[PETSc](https://petsc.org/release/)+[SLEPc](https://slepc.upv.es/). These, which are primarily written in C, have Python interfaces.
 
 ## References
 
