@@ -117,8 +117,18 @@ plt.tight_layout()
 plt.show()
 ```
 
+## Challenge
+Parameter extraction is hard because (a) the experiment theory matche is imperfect (b) degeneracies and the solution including an anticorrelation between charge transfer and Hund's exchange. Several different solutions exist in the literature.[^1],[^3],[^4],[^5]
+
 [^1]: Wei He et al.,
        [Nature Communications 15, 3496 (2024)](https://doi.org/10.1038/s41467-024-47852-x).
 
 [^2]: Wei He et al.,
        Nature Communications 15, 3496 (2024) [Supplementary information](https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-024-47852-x/MediaObjects/41467_2024_47852_MOESM1_ESM.pdf)
+
+[^3]: S. Kang et al.,
+      [Nature 583, 785–789 (2020)](https://doi.org/10.1038/s41586-020-2520-5)
+
+[^4]: Y. Cao et al., [arXiv:2407.01881](https://arxiv.org/abs/2407.01881)
+
+[^5]: L. Schue et al., [arXiv:2506.13381](https://arxiv.org/abs/2506.13381)

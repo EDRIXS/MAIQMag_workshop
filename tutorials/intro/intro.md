@@ -36,11 +36,10 @@ A two fermion term that accounts for:
 * Spin orbit coupling, $\lambda_i$, $\lambda_n$, $\lambda_c$
 * Hopping (in cases where this is part of the model). e.g. $V_{eg}$, $V_{t2g}$
 * Charge-transfer energy $\Delta$
-* Core hole potential  
 
 The four fermion term that accounts for:
 
-* Intra-valence-shell Coulomb interactions e.g. Slater integrals $F^0_{dd,i}$, $F^2_{dd,i}$, and $F^4_{dd,i}$ for a $d$ shell. 
+* Intra-valence-shell Coulomb interactions e.g. Slater integrals $F^0_{dd}$, $F^2_{dd}$, and $F^4_{dd}$ for a $d$ shell. 
 * Core-valence Coulomb interactions e.g. Slater integrals $G^1_{dp}$ and $G^3_{dp}$ for $L$-edge RIXS.
 
 [^1]: EDRIXS: An open source toolkit for simulating spectra of resonant inelastic x-ray scattering, YL Wang, G Fabbris, MPM Dean, and G Kotliar, [Computer Physics Communications 243, 151–165 (2019)](https://doi.org/10.1016/j.cpc.2019.04.018)

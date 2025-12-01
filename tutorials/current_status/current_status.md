@@ -18,7 +18,7 @@ Our recent [paper](https://markdean.info/assets/pdf/lajer2025hamiltonian.pdf) is
 * Obtained solutions similar to a human.
 * Super-human error analysis.
  
-[^1]: Hamiltonian parameter inference from resonant inelastic x-ray scattering with active learning, Marton K. Lajer, Xin Dai, Kipton Barros, Matthew R. Carbone, S. Johnston, and M. P. M. Dean
+[^1]: Hamiltonian parameter inference from resonant inelastic x-ray scattering with active learning, Marton K. Lajer, Xin Dai, Kipton Barros, Matthew R. Carbone, S. Johnston, and M. P. M. Dean, 
 [Phys. Rev. B 112, 155167 (2025)](https://doi.org/10.1103/tnqm-ttj3)
 
 [^2]: [EDRIXS inverse solver](https://github.com/EDRIXS/Inverse_scattering_solver)

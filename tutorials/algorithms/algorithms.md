@@ -73,9 +73,10 @@ hmat_i = np.zeros((ncfg_i, ncfg_i), dtype=complex)
 hmat_n = np.zeros((ncfg_n, ncfg_n), dtype=complex)
 hmat_i[:, :] += edrixs.two_fermion(emat_i, basis_i, basis_i)
 hmat_i[:, :] += edrixs.four_fermion(umat_i, basis_i)
+# hmat_n left out for brevity. 
 ```
 
-* Diagonalize Hamiltonian for initial and intermediate state using scipy, which call LAPACK under the hood.
+* Diagonalize Hamiltonian for initial and intermediate state using scipy, which calls LAPACK under the hood.
 
 ```{code-cell} ipython3
 eval_i, evec_i = scipy.linalg.eigh(hmat_i)
@@ -175,7 +176,7 @@ We are still finalizing the planned approach.
 
 * Improved in basis lookup methods for constructing Hamiltonian based on Ref. [^1].
 
-* Implement methods to re-use the shared structure of Krylov subspaces for different incident x-ray energies based on Ref. [^2].
+* Implement methods to re-use the shared structure of Krylov subspaces for different incident x-ray energies based on Ref. [^2]. Kipton recommends this preprint [^3].
 
 
 ### Infrastructure changes
@@ -190,3 +191,5 @@ The current plan is to call into more modern platform-agnostic CPU/GPU packages
 
 [^2]: Prakash Sharma, Luogen Xu, Fei Xue, and Yao Wang, Paradeisos: Accelerating resonant spectroscopy simulations using multishifted biconjugate gradient
        [Phys. Rev. B 112, 115113 (2025)](https://doi.org/10.1103/gfdn-pyr2)
+
+[^3]: Tyler Chen, The Lanczos algorithm for matrix functions: a handbook for scientists [arXiv:2410.11090](https://arxiv.org/abs/2410.11090)
