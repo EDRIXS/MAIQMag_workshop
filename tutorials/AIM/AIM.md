@@ -117,6 +117,11 @@ plt.tight_layout()
 plt.show()
 ```
 
+## Quality of match
+This plot, taken from our recent paper [^1], illustrates the level of precision in a good theory-experiment match.
+![Match](./match.png)
+
+
 ## Challenge
 Parameter extraction is hard because (a) the experiment theory matche is imperfect (b) degeneracies and the solution including an anticorrelation between charge transfer and Hund's exchange. Several different solutions exist in the literature.[^1],[^3],[^4],[^5]
 
