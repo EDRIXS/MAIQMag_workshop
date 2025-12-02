@@ -167,7 +167,7 @@ $$
 * The spectrum can then be represented as
 
 $$
-I \propto -\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F_i} \frac{1}{{\cal H} - E_i - \hbar\omega_{\boldsymbol{k}}+i \Gamma} \ket{F_i}
+I \propto -\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F_i} \frac{1}{{\cal H} - E_i - \hbar\omega_{\boldsymbol{q}}+i \Gamma} \ket{F_i}
 $$
 
 * The continued fraction technique is then used to construct the spectrum

@@ -9,12 +9,12 @@ Our recent [paper](https://markdean.info/assets/pdf/lajer2025hamiltonian.pdf) is
 * Incident-energy vs. energy-loss planes for specific geometry and incident x-ray polarization. This is the data for Fe<sub>2</sub>O<sub>3</sub>:[^3]
 
 ![Fe2O3](Fe2O3.png)
-* Mixture of Bayesian and gradient descent for the solver
+* Mixture of Bayesian and a greedy optimizer [PyBOBYQA](https://numericalalgorithmsgroup.github.io/pybobyqa/build/html/index.html) for the solver
 ![workflow](workflow.png)
 
 ## Performance 
 
-* We did 60 runs of 1000 iterations corresponding to running overnight on a modest computer.
+* We did 60 runs of 1000 iterations corresponding to running overnight on a personal computer.
 * Obtained solutions similar to a human.
 * Super-human error analysis.
  
