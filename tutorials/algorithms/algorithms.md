@@ -16,13 +16,14 @@ kernelspec:
 We need to compute
 
 $$
-I \propto \frac{1}{\mathcal{Z}(T)}\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \\
-\times \sum_f |M_{fi}|^2 \delta(E_f + \hbar\omega_{\boldsymbol{k}^\prime} - E_i - \hbar\omega_{\boldsymbol{k}} )
+I \propto \frac{1}{\mathcal{Z}(T)}\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \sum_f |M_{fi}|^2 \delta(E_f + \hbar\omega_{\boldsymbol{k}^\prime} - E_i - \hbar\omega_{\boldsymbol{k}} )
 $$
 
 $$
-M_{fi} = \sum_n \frac{\bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime}\ket{n}\bra{n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i}}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+\mathrm{i}\Gamma_n}.
+M_{fi} = \sum_n \frac{\bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime}\ket{n}\bra{n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i}}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+\mathrm{i}\Gamma_c},
 $$
+
+where $\delta$ is simulated with a Lorentzian of half width at half maximum $\Gamma$.
 
 ## Direct solution
 EDRIXS hosts a pure Python implementation of the cross-section that is suitable for performance insensitive cases and testing. This was what we used in the [atomic model](../atomic/atomic_model.md) section.
@@ -108,10 +109,10 @@ Currently, EDRIXS calls into its [Fortran layer](https://github.com/EDRIXS/edrix
 It is useful to re-express the cross-section as
 
 $$
-M_{fi} = \bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime,\hat{\epsilon}^\prime} \frac{1}{{\cal H}_n - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k},\hat{\epsilon}}\ket{i}
+M_{fi} = \bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime,\hat{\epsilon}^\prime} \frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c} {\cal D}^{\phantom\dagger}_{\boldsymbol{k},\hat{\epsilon}}\ket{i},
 $$
 
-The general process is:
+where ${\cal \widetilde{H}}$ is the intermediate state Hamiltonian. The general process is:
 
 * Fock basis is generated in integer representation
 
@@ -148,25 +149,25 @@ $$
 * Apply the absorption transition operator to the ground state
 
 $$
-\ket{b} = {\cal D}_i \ket{i}.
+\ket{b_i} = {\cal D}_{\boldsymbol{k},\hat{\epsilon}} \ket{i}.
 $$
 
-* Solve the following linear equation, involving the intermediate state Hamiltontian ${\cal H}^\prime$ via sparse [MINRES](https://en.wikipedia.org/wiki/Minimal_residual_method) methods 
+* Solve the following linear equation, involving the intermediate state Hamiltontian ${\cal \widetilde{H}}$ via sparse [MINRES](https://en.wikipedia.org/wiki/Minimal_residual_method) methods 
 
 $$
-(\frac{1}{{\cal H}^\prime - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_n}) \ket{x} = \ket{b}
+\left(\frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c}\right) \ket{x_i} = \ket{b_i}
 $$
 
 * Apply emission operator
 
 $$
-\ket{F} = {\cal D}_f^\dagger \ket{x}
+\ket{F_i} = {\cal D}^\dagger_{\boldsymbol{k}^\prime,\hat{\epsilon}^\prime}  \ket{x_i}
 $$
 
 * The spectrum can then be represented as
 
 $$
-I \propto \sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F} \frac{1}{{\cal H} - E_i - \hbar\omega_{\boldsymbol{k}}+i \Gamma_f} \ket{F}
+I \propto -\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F_i} \frac{1}{{\cal H} - E_i - \hbar\omega_{\boldsymbol{k}}+i \Gamma} \ket{F_i}
 $$
 
 * The continued fraction technique is then used to construct the spectrum

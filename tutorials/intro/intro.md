@@ -12,8 +12,7 @@ Consider a typical setup for RIXS.
 Here, RIXS intensity is described by  [^4]
 
 $$
-I \propto \frac{1}{\mathcal{Z}(T)}\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \\
-\times \sum_f |M_{fi}|^2 \delta(E_f + \hbar\omega_{\boldsymbol{k}^\prime} - E_i - \hbar\omega_{\boldsymbol{k}} )
+I \propto \frac{1}{\mathcal{Z}(T)}\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \sum_f |M_{fi}|^2 \delta(E_f + \hbar\omega_{\boldsymbol{k}^\prime} - E_i - \hbar\omega_{\boldsymbol{k}} )
 $$
 
 where $\mathcal{Z}(T) = \sum_i e^{- E_i/(k_\mathrm{B}T)}$ is the partition function. The main part of the physics is in the matrix elements $M_{fi}$, which can be illustrated as 
@@ -23,12 +22,12 @@ where $\mathcal{Z}(T) = \sum_i e^{- E_i/(k_\mathrm{B}T)}$ is the partition funct
 and calculated via
 
 $$
-M_{fi} = \sum_n \frac{\bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime}\ket{n}\bra{n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i}}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+\mathrm{i}\Gamma_n/2}.
+M_{fi} = \sum_n \frac{\bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime}\ket{n}\bra{n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i}}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+\mathrm{i}\Gamma_c}.
 $$
 
 ## Hamiltonian
 
-Adopting the second quantization formalism, Hamiltonians in EDRIXS involve:
+Adopting the second quantization formalism, Hamiltonians ${\cal H}$ and ${\cal \widetilde{H}}$ for the initial and intermediate state involve:
 
 A two fermion term that accounts for:
 
