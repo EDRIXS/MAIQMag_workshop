@@ -163,18 +163,21 @@ $$
 \ket{F} = {\cal D}_f^\dagger \ket{x}
 $$
 
-* Use continued fraction technique to construct spectrum
+* The spectrum can then be represented as
 
 $$
-I_{\rm RIXS} = \bra{F} \frac{1}{{\cal H}_n - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_n/2} \ket{F}
+I \propto \sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F} \frac{1}{{\cal H}_i - E_i - \hbar\omega_{\boldsymbol{k}}+i \Gamma_f} \ket{F}
 $$
+
+* The continued fraction technique is then used to construct the spectrum
+
 
 ## Plans
 We are still finalizing the planned approach. 
 
 ### Algorithm changes
 
-* Improved in basis lookup methods for constructing Hamiltonian based on Ref. [^1].
+* Improved basis lookup methods for constructing Hamiltonian based on Ref. [^1].
 
 * Implement methods to re-use the shared structure of Krylov subspaces for different incident x-ray energies based on Ref. [^2]. Kipton recommends this preprint [^3].
 
