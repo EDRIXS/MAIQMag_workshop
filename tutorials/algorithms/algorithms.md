@@ -155,7 +155,7 @@ $$
 * Solve the following linear equation, involving the intermediate state Hamiltontian ${\cal \widetilde{H}}$ via sparse [MINRES](https://en.wikipedia.org/wiki/Minimal_residual_method) methods 
 
 $$
-\left(\frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c}\right) \ket{x_i} = \ket{b_i}
+\left({\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c\right) \ket{x_i} = \ket{b_i}
 $$
 
 * Apply emission operator
