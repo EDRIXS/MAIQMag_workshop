@@ -106,13 +106,74 @@ print(trans_op.shape)
 ## Current EDRIXS solver
 Currently, EDRIXS calls into its [Fortran layer](https://github.com/EDRIXS/edrixs/tree/master/src). This is sparsely documented and suffers from serious limitations in portability, maintainability, and flexibility. See [edrixs.ed_siam_fort](https://github.com/EDRIXS/edrixs/blob/master/edrixs/solvers.py#L1819) and [edrixs.rixs_siam_fort](https://github.com/EDRIXS/edrixs/blob/master/edrixs/solvers.py#L2478), which calls [ed_driver.f90](https://github.com/EDRIXS/edrixs/blob/master/src/ed_driver.f90) and [rixs_driver.f90](https://github.com/EDRIXS/edrixs/blob/master/src/rixs_driver.f90). We used this in the [Anderson impurity model section](../AIM/AIM.md).
 
-It is useful to re-express the cross-section as
+### Mathematics
+To do the calculation, it is useful to reformulate the cross-section compared to the most common Kramers-Heisenberg form. We first note that one can re-express $M_{fi}$ as
 
 $$
-M_{fi} = \bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime,\hat{\epsilon}^\prime} \frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c} {\cal D}^{\phantom\dagger}_{\boldsymbol{k},\hat{\epsilon}}\ket{i},
+M_{fi} = \bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime} \frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i},
 $$
 
-where ${\cal \widetilde{H}}$ is the intermediate state Hamiltonian. The general process is:
+where ${\cal \widetilde{H}}$ is the intermediate state Hamiltonian with $\widetilde{\mathcal H}\ket{n} = E_n\ket{n}$ and $\sum_n \ket{n}\bra{n} = \mathbb{I}.$ To see this, note that using a spectral decomposition we can write
+
+$$
+\frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c }
+ = \sum_n |n\rangle \frac{1}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c  }\langle n|.
+$$
+
+
+Inserting this operator between the dipole operators, we get
+
+$$
+M_{fi} = \langle f|{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'} \left(\sum_n |n\rangle \frac{1}{E_n-E_i-\hbar\omega_{\mathbf{k}}+i\Gamma_c}\langle n|\right) {\cal D}_{\mathbf{k}\hat\epsilon}|i\rangle.
+$$
+
+By rearranging, we can show that this is equivalent to the original equation with
+
+$$
+M_{fi} =\sum_n \frac{\langle f|{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'}|n\rangle \langle n|{\cal D}_{\mathbf{k}\hat\epsilon}|i\rangle}{E_n-E_i-\hbar\omega{\mathbf{k}}+i\Gamma_c}.
+$$
+
+The next step is to define an effective scattering operator
+
+$$
+\mathcal O_i \equiv \mathcal D^\dagger_{\boldsymbol{k}^\prime\hat\epsilon^\prime} \frac{1}{\widetilde{\mathcal H}-E_i-\hbar\omega_{\boldsymbol k}+i\Gamma_c} \mathcal D_{\boldsymbol{k}\hat\epsilon},
+$$
+
+so that we have
+
+$$
+\sum_f |M_{fi}|^2 \delta(E_f-E_i-\hbar\omega_{\boldsymbol q})=\sum_f \langle i|\mathcal O_i^\dagger|f\rangle\langle f|\mathcal O_i|i\rangle \delta(E_f-E_i-\hbar\omega_{\boldsymbol q}).
+$$
+
+Since the set of $|f\rangle$ is mutually orthonormal, they have the property that
+
+$$
+\sum_f |f\rangle \delta(E_f-E)\langle f|=\delta(\mathcal H-E)
+$$
+
+such that
+
+$$
+\sum_f |M_{fi}|^2 \delta(E_f-E_i-\hbar\omega_{\boldsymbol q})=\langle i|\mathcal O_i^\dagger \delta({\mathcal H} -E_i-\hbar\omega_{\boldsymbol q}) \mathcal O_i|i\rangle .
+$$
+
+The Dirac $\delta$ function can be represented as a limiting case of a Lorentzian with width $\Gamma$
+
+
+$$
+\delta({\mathcal H} -E_i-\hbar\omega_{\boldsymbol q})\to -\frac{1}{\pi} \Im\left(\frac{1}{{\mathcal H} -E_i-\hbar\omega_{\boldsymbol q} +i \Gamma}\right).
+$$
+
+If we define the prepared state using $|F_i\rangle \equiv \mathcal O_i|i\rangle$, and leave out a factor $\pi$, we can assemable the full equation as
+
+$$
+I \propto -\sum_i e^{-E_i/(k_BT)} \Im\langle F_i|\frac{1}{\mathcal H-E_i-\hbar\omega_{\boldsymbol q}+i\Gamma}|F_i\rangle.
+$$
+
+At some later point, we will fill in the continued fraction technique for calculation the spectrum from this equation. 
+
+### Compuational methods
+The general process is:
 
 * Fock basis is generated in integer representation
 
@@ -152,7 +213,7 @@ $$
 \ket{b_i} = {\cal D}_{\boldsymbol{k},\hat{\epsilon}} \ket{i}.
 $$
 
-* Solve the following linear equation, involving the intermediate state Hamiltontian ${\cal \widetilde{H}}$ via sparse [MINRES](https://en.wikipedia.org/wiki/Minimal_residual_method) methods 
+* Solve the following linear equation, involving the intermediate state Hamiltonian ${\cal \widetilde{H}}$ via sparse [MINRES](https://en.wikipedia.org/wiki/Minimal_residual_method) methods 
 
 $$
 \left({\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c\right) \ket{x_i} = \ket{b_i}
