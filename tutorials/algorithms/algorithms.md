@@ -170,7 +170,71 @@ $$
 I \propto -\sum_i e^{-E_i/(k_BT)} \Im\langle F_i|\frac{1}{\mathcal H-E_i-\hbar\omega_{\boldsymbol q}+i\Gamma}|F_i\rangle.
 $$
 
-At some later point, we will fill in the continued fraction technique for calculation the spectrum from this equation. 
+In this form, it is possible to effciently compute the spectrum using Lanczos methods. Let's define 
+
+$$
+\sigma_i = \langle F_i|\frac{1}{\mathcal H-E_i-\hbar\omega_{\boldsymbol q}+i\Gamma}|F_i\rangle
+$$
+
+and
+
+$$
+z = E_i + \hbar\omega_{\boldsymbol q} - i\Gamma.
+$$
+
+The key thing to compute is 
+
+$$
+\sigma_i = |F_i|^2 \langle f_i|\frac{1}{\mathcal H- z}|f_i\rangle,
+$$
+
+where $\ket{F_i} = |F_i| \ket{f_i}$ splits the vectors into a nomalized component and a normalization factor.
+
+Krylov's methods give us a procedure for constructing a new basis $V_m = [\ket{q_0}, \ket{q_1}, ... \ket{q_m}]$, whose first element is $\ket{q_0} = \ket{F_i}$, which allows us to effciently represent the Hamiltonanian in a tridiagonal form
+
+$$
+{\cal H} \approx V_m T_m V_m^\dagger
+$$
+
+
+$$
+T_m =
+\begin{pmatrix}
+\alpha_0 & \beta_1 & 0        & 0        & \cdots & 0 \\
+\beta_1  & \alpha_1 & \beta_2 & 0        & \cdots & 0 \\
+0        & \beta_2  & \alpha_2 & \beta_3 & \cdots & 0 \\
+0        & 0        & \beta_3  & \alpha_3 & \ddots & \vdots \\
+\vdots   & \vdots   & \vdots   & \ddots   & \ddots & \beta_{m-1} \\
+0        & 0        & 0        & \cdots   & \beta_{m-1} & \alpha_{m-1}
+\end{pmatrix}.
+$$
+
+$$
+\sigma_i
+=
+|F_i|^2\,\langle f_i|(\mathcal H - z)^{-1}|f_i\rangle
+\approx
+|F_i|^2\,
+\cfrac{1}{
+\alpha_1 - z
+-
+\cfrac{\beta_1^2}{
+\alpha_2 - z
+-
+\cfrac{\beta_2^2}{
+\alpha_3 - z
+-
+\ddots
+-
+\cfrac{\beta_{m-1}^2}{
+\alpha_m - z
+}
+}
+}}
+$$
+
+The recursive continued fraction appears because the inverse of a tridiagonal matrix can be built by repeatedly eliminating deeper blocks, and Lanczos produces exactly the tridiagonal structure needed for that elimination to work step by step.
+
 
 ### Compuational methods
 The general process is:
