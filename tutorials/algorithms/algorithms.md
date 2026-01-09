@@ -209,6 +209,8 @@ T_m =
 \end{pmatrix}.
 $$
 
+Once this form is constructed, the components of the spectrum can be built via. 
+
 $$
 \sigma_i
 =
@@ -233,10 +235,10 @@ $$
 }}
 $$
 
-The recursive continued fraction appears because the inverse of a tridiagonal matrix can be built by repeatedly eliminating deeper blocks, and Lanczos produces exactly the tridiagonal structure needed for that elimination to work step by step.
+The recursive continued fraction arises because the inverse of a tridiagonal matrix can be constructed by repeatedly eliminating deeper blocks, and Lanczos produces exactly the tridiagonal structure required for this elimination to proceed step by step.
 
 
-### Compuational methods
+### Computational methods
 The general process is:
 
 * Fock basis is generated in integer representation
