@@ -124,7 +124,7 @@ $$
 Inserting this operator between the dipole operators, we get
 
 $$
-M_{fi} = \langle f|{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'} \left(\sum_n |n\rangle \frac{1}{E_n-E_i-\hbar\omega_{\mathbf{k}}+i\Gamma_c}\langle n|\right) {\cal D}_{\mathbf{k}\hat\epsilon}|i\rangle.
+M_{fi} = \langle f|{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'} \Biggl(\sum_n |n\rangle \frac{1}{E_n-E_i-\hbar\omega_{\mathbf{k}}+i\Gamma_c}\langle n|\Biggl) {\cal D}_{\mathbf{k}\hat\epsilon}|i\rangle.
 $$
 
 By rearranging, we can show that this is equivalent to the original equation with
