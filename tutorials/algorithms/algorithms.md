@@ -20,13 +20,13 @@ I \propto \frac{1}{\mathcal{Z}(T)}\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \sum_f |M_
 $$
 
 $$
-M_{fi} = \sum_n \frac{\bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime}\ket{n}\bra{n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i}}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+\mathrm{i}\Gamma_c},
+M_{fi} = \sum_n \frac{\bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime}\ket{n}\bra{n} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i}}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}-i\Gamma_c},
 $$
 
-where $\delta$ is simulated with a Lorentzian of half width at half maximum $\Gamma$.
+where $\delta$ is simulated with a Lorentzian of half-width at half-maximum $\Gamma$.
 
 ## Direct solution
-EDRIXS hosts a pure Python implementation of the cross-section that is suitable for performance insensitive cases and testing. This was what we used in the [atomic model](../atomic/atomic_model.md) section.
+EDRIXS hosts a pure Python implementation of the cross-section that is suitable for performance-insensitive cases and testing. This was what we used in the [atomic model](../atomic/atomic_model.md) section.
 See the diagonalization step in [edrixs.solvers.ed_1v1c_py](https://github.com/EDRIXS/edrixs/blob/master/edrixs/solvers.py#L28) and spectrum construction in [edrixs.solvers.rixs_1v1c_py](https://github.com/EDRIXS/edrixs/blob/master/edrixs/solvers.py#L419). The following is a _crude_ illustration of what happens
 
 * Build `emat` and `umat` in $Y_l^m$ single-particle basis
@@ -110,33 +110,33 @@ Currently, EDRIXS calls into its [Fortran layer](https://github.com/EDRIXS/edrix
 To do the calculation, it is useful to reformulate the cross-section compared to the most common Kramers-Heisenberg form. We first note that one can re-express $M_{fi}$ as
 
 $$
-M_{fi} = \bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime} \frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i},
+M_{fi} = \bra{f} {\cal D}^\dagger_{\boldsymbol{k}^\prime\hat{\epsilon}^\prime} \frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}-i\Gamma_c} {\cal D}^{\phantom\dagger}_{\boldsymbol{k}\hat{\epsilon}}\ket{i},
 $$
 
 where ${\cal \widetilde{H}}$ is the intermediate state Hamiltonian with $\widetilde{\mathcal H}\ket{n} = E_n\ket{n}$ and $\sum_n \ket{n}\bra{n} = \mathbb{I}.$ To see this, note that using a spectral decomposition we can write
 
 $$
-\frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c }
- = \sum_n |n\rangle \frac{1}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c  }\langle n|.
+\frac{1}{{\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}-i\Gamma_c }
+ = \sum_n |n\rangle \frac{1}{E_n - E_i - \hbar\omega_{\boldsymbol{k}}-i\Gamma_c  }\langle n|.
 $$
 
 
 Inserting this operator between the dipole operators, we get
 
 $$
-M_{fi} = \bra{f}{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'} \Biggl(\sum_n |n\rangle \frac{1}{E_n-E_i-\hbar\omega_{\mathbf{k}}+i\Gamma_c}\langle n|\Biggl) {\cal D}_{\mathbf{k}\hat\epsilon}\ket{i}.
+M_{fi} = \bra{f}{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'} \Biggl(\sum_n |n\rangle \frac{1}{E_n-E_i-\hbar\omega_{\mathbf{k}}-i\Gamma_c}\langle n|\Biggl) {\cal D}_{\mathbf{k}\hat\epsilon}\ket{i}.
 $$
 
 By rearranging, we can show that this is equivalent to the original equation with
 
 $$
-M_{fi} =\sum_n \frac{\langle f|{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'}|n\rangle \langle n|{\cal D}_{\mathbf{k}\hat\epsilon}|i\rangle}{E_n-E_i-\hbar\omega{\mathbf{k}}+i\Gamma_c}.
+M_{fi} =\sum_n \frac{\langle f|{\cal D}^\dagger_{\mathbf{k}'\hat\epsilon'}|n\rangle \langle n|{\cal D}_{\mathbf{k}\hat\epsilon}|i\rangle}{E_n-E_i-\hbar\omega_{\mathbf{k}}-i\Gamma_c}.
 $$
 
 The next step is to define an effective scattering operator
 
 $$
-\mathcal O_i \equiv \mathcal D^\dagger_{\boldsymbol{k}^\prime\hat\epsilon^\prime} \frac{1}{\widetilde{\mathcal H}-E_i-\hbar\omega_{\boldsymbol k}+i\Gamma_c} \mathcal D_{\boldsymbol{k}\hat\epsilon},
+\mathcal O_i \equiv \mathcal D^\dagger_{\boldsymbol{k}^\prime\hat\epsilon^\prime} \frac{1}{\widetilde{\mathcal H}-E_i-\hbar\omega_{\boldsymbol k}-i\Gamma_c} \mathcal D_{\boldsymbol{k}\hat\epsilon},
 $$
 
 so that we have
@@ -161,16 +161,16 @@ The Dirac $\delta$ function can be represented as a limiting case of a Lorentzia
 
 
 $$
-\delta({\mathcal H} -E_i-\hbar\omega_{\boldsymbol q})\to -\frac{1}{\pi} \Im\left(\frac{1}{{\mathcal H} -E_i-\hbar\omega_{\boldsymbol q} +i \Gamma}\right).
+\delta({\mathcal H} -E_i-\hbar\omega_{\boldsymbol q})\to -\frac{1}{\pi} \Im\left(\frac{1}{{\mathcal H} -E_i-\hbar\omega_{\boldsymbol q} +i\Gamma}\right).
 $$
 
-If we define the prepared state using $|F_i\rangle \equiv \mathcal O_i|i\rangle$, and leave out a factor $\pi$, we can assemable the full equation as
+If we define the prepared state using $|F_i\rangle \equiv \mathcal O_i|i\rangle$, and leave out a factor $\pi$, we can assemble the full equation as
 
 $$
 I \propto -\sum_i e^{-E_i/(k_BT)} \Im\langle F_i|\frac{1}{\mathcal H-E_i-\hbar\omega_{\boldsymbol q}+i\Gamma}|F_i\rangle.
 $$
 
-In this form, it is possible to effciently compute the spectrum using Lanczos methods. Let's define 
+In this form, the spectrum can be efficiently computed using Lanczos methods. Let's define 
 
 $$
 \sigma_i = \langle F_i|\frac{1}{\mathcal H-E_i-\hbar\omega_{\boldsymbol q}+i\Gamma}|F_i\rangle
@@ -188,9 +188,9 @@ $$
 \sigma_i = |F_i|^2 \langle f_i|\frac{1}{\mathcal H- z}|f_i\rangle,
 $$
 
-where $\ket{F_i} = |F_i| \ket{f_i}$ splits the vectors into a nomalized component and a normalization factor.
+where $\ket{F_i} = |F_i| \ket{f_i}$ splits the vectors into a normalized component and a normalization factor.
 
-Krylov's methods give us a procedure for constructing a new basis $V_m = [\ket{q_0}, \ket{q_1}, ... \ket{q_m}]$, whose first element is $\ket{q_0} = \ket{F_i}$, which allows us to effciently represent the Hamiltonanian in a tridiagonal form
+Krylov's methods give us a procedure for constructing a new basis $V_m = [\ket{q_0}, \ket{q_1}, ... \ket{q_{m-1}}]$, whose first element is $\ket{q_0} = \ket{F_i}$, which allows us to efficiently represent the Hamiltonian in a tridiagonal form
 
 $$
 {\cal H} \approx V_m T_m V_m^\dagger
@@ -209,7 +209,7 @@ T_m =
 \end{pmatrix}.
 $$
 
-Once this form is constructed, the components of the spectrum can be built via. 
+Once this form is constructed, the components of the spectrum can be built via
 
 $$
 \sigma_i
@@ -218,18 +218,18 @@ $$
 \approx
 |F_i|^2\,
 \cfrac{1}{
-\alpha_1 - z
+\alpha_0 - z
 -
 \cfrac{\beta_1^2}{
-\alpha_2 - z
+\alpha_1 - z
 -
 \cfrac{\beta_2^2}{
-\alpha_3 - z
+\alpha_2 - z
 -
 \ddots
 -
 \cfrac{\beta_{m-1}^2}{
-\alpha_m - z
+\alpha_{m-1} - z
 }
 }
 }}
@@ -282,7 +282,7 @@ $$
 * Solve the following linear equation, involving the intermediate state Hamiltonian ${\cal \widetilde{H}}$ via sparse [MINRES](https://en.wikipedia.org/wiki/Minimal_residual_method) methods 
 
 $$
-\left({\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}+i\Gamma_c\right) \ket{x_i} = \ket{b_i}
+\left({\cal \widetilde{H}} - E_i - \hbar\omega_{\boldsymbol{k}}-i\Gamma_c\right) \ket{x_i} = \ket{b_i}
 $$
 
 * Apply emission operator
@@ -294,7 +294,7 @@ $$
 * The spectrum can then be represented as
 
 $$
-I \propto -\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F_i} \frac{1}{{\cal H} - E_i - \hbar\omega_{\boldsymbol{q}}+i \Gamma} \ket{F_i}
+I \propto -\sum_{i}e^{- E_{i}/(k_\mathrm{B}T)} \Im \bra{F_i} \frac{1}{{\cal H} - E_i - \hbar\omega_{\boldsymbol{q}}+i\Gamma} \ket{F_i}
 $$
 
 * The continued fraction technique is then used to construct the spectrum
