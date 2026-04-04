@@ -1,4 +1,4 @@
-[project]
+[workspace]
 authors = [
     "Dan Allan <dallan@bnl.gov>",
     "Brigitta Sipőcz <brigitta.sipocz@gmail.com>",
@@ -15,15 +15,7 @@ version = "0.1.0"
 platforms = ["linux-64"]
 
 [feature.base.tasks]
-build = { cmd = [
-    "sphinx-build",
-    ".",  # source directory
-    "_build/html",  # target directory
-    "-n",  # warn about missing references
-    "-W",  # any warnings fail the build
-    "-T",  # show tracebacks
-    "--keep-going",  # do not stop on error
-] }
+build = { cmd = "bash build.sh" }
 clean = "rm -rf _build/*"
 start = "jupyter lab  --FileContentsManager.preferred_dir tutorials"
 test = "bash ./test.sh"
