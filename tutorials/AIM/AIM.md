@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.2
+    jupytext_version: 1.18.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -19,7 +19,6 @@ This example examines RIXS simulations for NiPS₃ based on Ref. [^1].
 ![AIM](./levels.png)
 
 In this example, we will focus on some properties of the model. If desired, the function we will run can be examined [here](https://github.com/EDRIXS/MAIQMag_workshop/blob/main/tutorials/AIM/helper_function.py).
-
 
 ```{code-cell} ipython3
 :tags: [remove_output]
@@ -42,11 +41,8 @@ plt.rcParams.update({'figure.dpi': 150, 'savefig.dpi': 150,
 ## Original model
 
 ```{code-cell} ipython3
----
-tags: [remove_output]
-jupyter:
-  outputs_hidden: true
----
+:tags: [remove_output]
+
 ominc, eloss, rixs, impurity_occupation = make_rixs()
 ```
 
@@ -63,14 +59,18 @@ ax.set_title(f"Model from Nat. Comm. 15, 3496 (2024)")
 plt.tight_layout()
 plt.show()
 ```
+
 Let's discuss how we obtained this model. (If desired, the full gory details are in Ref. [^2].)
 
 ## Magnetic field behavior
 What is the spin of the ground state? And what will happen when a magnetic field is applied?
 
 ```{code-cell} ipython3
-:tags: [remove_output]
-
+---
+tags: [remove_output]
+jupyter:
+  outputs_hidden: true
+---
 ominc, eloss, rixs, impurity_occupation = make_rixs(ext_B=np.array([0.1, 0, 0]))
 ```
 
