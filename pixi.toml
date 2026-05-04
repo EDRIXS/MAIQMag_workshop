@@ -15,7 +15,7 @@ version = "0.1.0"
 platforms = ["linux-64"]
 
 [feature.base.tasks]
-build = { cmd = "bash build.sh" }
+build = { cmd = "sphinx-build -M html . _build" }
 clean = "rm -rf _build/*"
 start = "jupyter lab  --FileContentsManager.preferred_dir tutorials"
 test = "bash ./test.sh"
@@ -38,6 +38,7 @@ nbval = ">=0.11.0,<0.12"
 jupytext = ">=1.17.1,<2"
 ipympl = ">=0.9"
 edrixs = { version = ">=0.1.1", channel = "conda-forge" }
+setuptools = "*"
 
 [feature.base.pypi-dependencies]
 sphinx = ">=8.0.2"

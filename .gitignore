@@ -1,3 +1,8 @@
+# EDRIXS files
+tutorials/AIM/eigvals.dat
+tutorials/AIM/eigvec.*
+tutorials/AIM/rixs_poles.*
+
 _build/*
 .ipynb_checkpoints
 /.pixi/*
