@@ -37,7 +37,7 @@ pytest = ">=8.3.5,<9"
 nbval = ">=0.11.0,<0.12"
 jupytext = ">=1.17.1,<2"
 ipympl = ">=0.9"
-edrixs = { version = ">=0.1.1", channel = "conda-forge" }
+edrixs = { version = ">=0.1.2", channel = "conda-forge" }
 setuptools = "*"
 
 [feature.base.pypi-dependencies]
@@ -84,7 +84,7 @@ notebook = "~=7.2.1"
 jupyterlab-myst = ">=2.4"
 jupytext = ">=1.16"
 ipympl = ">=0.9"
-edrixs = { version = ">=0.1.1", channel = "conda-forge" }
+edrixs = { version = ">=0.1.2", channel = "conda-forge" }
 
 [feature.jupyterlite-host.tasks]
 setup_wasm = {cmd = "pixi install -e jupyterlite-runtime", inputs = ["pixi.lock"]}

@@ -1,0 +1,25 @@
+{
+    "name": "MAIQMag Workshop",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "runArgs": ["--platform=linux/amd64"],
+    "postCreateCommand": "curl -fsSL https://pixi.sh/install.sh | bash && ~/.pixi/bin/pixi install -e default",
+    "remoteEnv": {
+        "PATH": "/home/vscode/.pixi/bin:${containerEnv:PATH}"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.jupyter-keymap",
+                "executablebookproject.myst-highlight"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/workspaces/MAIQMag_workshop/.pixi/envs/default/bin/python",
+                "jupyter.notebookFileRoot": "${workspaceFolder}"
+            }
+        }
+    },
+    "forwardPorts": [8888]
+}
