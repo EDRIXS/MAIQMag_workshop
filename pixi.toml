@@ -5,10 +5,10 @@ authors = [
     "Ross Barnowski <rossbar@caltech.edu>",
     "Kyle Sunden <git@ksunden.space>",
 ]
-channels = ["https://repo.mamba.pm/emscripten-forge", "conda-forge"]
+channels = ["conda-forge"]
 description = "Add a short description here"
 name = "executable-tutorials"
-platforms = ["linux-64", "emscripten-wasm32"]
+platforms = ["linux-64"]
 version = "0.1.0"
 
 [feature.base]
@@ -61,48 +61,7 @@ platforms = ["linux-64"]
 [feature.py313.dependencies]
 python = "3.13.*"
 
-[feature.jupyterlite-runtime]
-channels = ["https://repo.mamba.pm/emscripten-forge", "conda-forge"]
-platforms = ["emscripten-wasm32"]
-
-[feature.jupyterlite-runtime.dependencies]
-xeus-python = "*"
-python = ">=3.11"
-matplotlib = ">=3.9"
-ipympl = ">=0.9"
-jupytext = ">=1.16"
-
-[feature.jupyterlite-host]
-channels = ["conda-forge"]
-platforms = ["linux-64"]
-
-[feature.jupyterlite-host.dependencies]
-jupyterlab = "~=4.2.4"
-jupyterlite-core = "==0.4.0"
-jupyterlite-xeus = "*"
-notebook = "~=7.2.1"
-jupyterlab-myst = ">=2.4"
-jupytext = ">=1.16"
-ipympl = ">=0.9"
-edrixs = { version = ">=0.1.2", channel = "conda-forge" }
-
-[feature.jupyterlite-host.tasks]
-setup_wasm = {cmd = "pixi install -e jupyterlite-runtime", inputs = ["pixi.lock"]}
-convert_ipynbs = {cmd = "bash convert_all_jupyterlite.sh", inputs = ["tutorials/"], outputs = ["_build/ipynbs"]}
-
-[feature.jupyterlite-host.tasks.build_wasm]
-cmd = "jupyter lite build --XeusAddon.prefix=.pixi/envs/jupyterlite-runtime --contents _build/ipynbs/tutorials --output-dir _build/html/jupyterlite --settings-overrides=.binder/overrides.json --log-level DEBUG"
-depends-on = ["setup_wasm", "convert_ipynbs"]
-outputs = ["_build/html/jupyterlite/"]
-inputs = ["pixi.lock", "tutorials/"]
-
-[feature.jupyterlite-host.tasks.start_wasm]
-cmd = "python -m http.server 8000 -d _build/html/jupyterlite/"
-depends-on = ["build_wasm"]
-
 [environments]
 default = ["base"]
 py312 = ["base", "py312"]
 py313 = ["base", "py313"]
-jupyterlite-runtime = ["jupyterlite-runtime"]
-jupyterlite-host = ["jupyterlite-host"]
